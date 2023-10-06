@@ -6,17 +6,6 @@
     Section : B
 
 */
-/*
-    Information :
-        Rows    :   12+12 = 24
-        Columns :   8+1+8 = 17
-
-        Center Box Row Start:   8
-        Center Box Row End  :   16
-        Center Box Col Start:   5
-        Center Box Col End  :   13
-
-*/
 #include <iostream>
 using namespace std;
 
