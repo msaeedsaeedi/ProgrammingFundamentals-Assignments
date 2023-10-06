@@ -22,14 +22,12 @@ using namespace std;
 
 int main()
 {
-    bool OuterDiamond, InnerDiamond, CenterBox, Not_PascalTriangle, Not_PascalTriangle_RowFlag = false;
-    int Pascal_Coefficent = 1;
-    int NotPascalColumnL = 8;
-    int NotPascalColumnR = 10;
-    for (int i = 1; i <= 9; i++, cout << endl)
+    bool OuterDiamond, InnerDiamond, CenterBox, Not_Triangle, Not_Triangle_RowFlag = false;
+    short int NotTrianlgeColumnL = 8;
+    short int NotTrianlgeColumnR = 10;
+    for (short int i = 1; i <= 9; i++, cout << endl)
     {
-        Pascal_Coefficent = 1;
-        for (int j = 1; j <= 17; j++)
+        for (short int j = 1; j <= 17; j++)
         {
             OuterDiamond = (j - 8) == i || (i + j) == 10;
 
@@ -43,27 +41,25 @@ int main()
                 cout << ((i % 2 == 0) ? ("*") : ("-"));
             else if (CenterBox)
             {
-                Not_PascalTriangle = (j >= 5 && j <= NotPascalColumnL) || j >= NotPascalColumnR;
-                if (Not_PascalTriangle)
-                    cout << "*", Not_PascalTriangle_RowFlag = true;
+                Not_Triangle = (j >= 5 && j <= NotTrianlgeColumnL) || j >= NotTrianlgeColumnR;
+                if (Not_Triangle)
+                    cout << "*", Not_Triangle_RowFlag = true;
                 else
                 {
-                    cout << Pascal_Coefficent;
-                    // Pascal_Coefficent = Pascal_Coefficent * ((i - 7) - (j - 5)) / (j - 5);
+                    cout << "1";
                 }
             }
             else
                 cout << " ";
 
-            OuterDiamond = 0, InnerDiamond = 0, CenterBox = 0, Not_PascalTriangle = 0;
+            OuterDiamond = 0, InnerDiamond = 0, CenterBox = 0, Not_Triangle = 0;
         }
-        if (Not_PascalTriangle_RowFlag)
-            NotPascalColumnL--, NotPascalColumnR++;
+        if (Not_Triangle_RowFlag)
+            NotTrianlgeColumnL--, NotTrianlgeColumnR++;
     }
-    for (int i = 10; i <= 16; i++, cout << endl)
+    for (short int i = 10; i <= 16; i++, cout << endl)
     {
-        Pascal_Coefficent = 1;
-        for (int j = 1; j <= 17; j++)
+        for (short int j = 1; j <= 17; j++)
         {
             CenterBox = (j >= 5) && (j <= 13);
 
@@ -73,28 +69,31 @@ int main()
                 cout << ((i % 2 == 0) ? ("*") : ("-"));
             else if (CenterBox)
             {
-                Not_PascalTriangle = (j >= 5 && j <= NotPascalColumnL) || j >= NotPascalColumnR;
-                if (Not_PascalTriangle)
-                    cout << "*", Not_PascalTriangle_RowFlag = true;
+                Not_Triangle = (j >= 5 && j <= NotTrianlgeColumnL) || j >= NotTrianlgeColumnR;
+                if (Not_Triangle)
+                    cout << "*", Not_Triangle_RowFlag = true;
+                else if (i >= 13 && j >= 10)
+                {
+                    cout << " ";
+                }
                 else
                 {
-                    cout << Pascal_Coefficent;
-                    // Pascal_Coefficent = Pascal_Coefficent * ((i - 7) - (j - 5)) / (j - 5);
+                    cout << "1";
                 }
             }
             else
                 cout << " ";
-            CenterBox = 0, Not_PascalTriangle = 0;
+            CenterBox = 0, Not_Triangle = 0;
         }
-        if (Not_PascalTriangle_RowFlag)
+        if (Not_Triangle_RowFlag)
         {
-            (i < 12) ? NotPascalColumnL-- : NotPascalColumnL++;
-            (i < 12) ? NotPascalColumnR++ : NotPascalColumnR--;
+            (i < 12) ? NotTrianlgeColumnL-- : NotTrianlgeColumnL++;
+            (i < 12) ? NotTrianlgeColumnR++ : NotTrianlgeColumnR--;
         }
     }
-    for (int i = 8; i >= 1; i--, cout << endl)
+    for (short int i = 8; i >= 1; i--, cout << endl)
     {
-        for (int j = 1; j <= 17; j++)
+        for (short int j = 1; j <= 17; j++)
         {
             OuterDiamond = (j - 8) == i || (i + j) == 10;
 
