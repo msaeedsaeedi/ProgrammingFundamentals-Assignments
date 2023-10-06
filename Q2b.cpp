@@ -27,7 +27,7 @@ int main()
     short int NotTrianlgeColumnR = 10;
     for (short int i = 1; i <= 9; i++, cout << endl)
     {
-        for (short int j = 1; j <= 17; j++)
+        for (short int j = 1, l = 0; j <= 17; j++)
         {
             OuterDiamond = (j - 8) == i || (i + j) == 10;
 
@@ -46,7 +46,10 @@ int main()
                     cout << "*", Not_Triangle_RowFlag = true;
                 else
                 {
-                    cout << "1";
+                    if ((i + j - 16) <= (i - 7))
+                        cout << ++l;
+                    else
+                        cout << --l;
                 }
             }
             else
@@ -59,7 +62,7 @@ int main()
     }
     for (short int i = 10; i <= 16; i++, cout << endl)
     {
-        for (short int j = 1; j <= 17; j++)
+        for (short int j = 1, l = 0; j <= 17; j++)
         {
             CenterBox = (j >= 5) && (j <= 13);
 
@@ -78,7 +81,10 @@ int main()
                 }
                 else
                 {
-                    cout << "1";
+                    if ((i + j - 16) <= (i - 7))
+                        cout << ++l;
+                    else
+                        cout << --l;
                 }
             }
             else
