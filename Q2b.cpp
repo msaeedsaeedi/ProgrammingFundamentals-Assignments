@@ -36,24 +36,24 @@ int main()
             CenterBox = (i >= 8 && j >= 5) && (j <= 13);
 
             if (OuterDiamond)
-                cout << ((i % 2 == 0) ? ("-") : ("*"));
+                cout << ((i % 2 == 0) ? ("- ") : ("* "));
             else if (InnerDiamond)
-                cout << ((i % 2 == 0) ? ("*") : ("-"));
+                cout << ((i % 2 == 0) ? ("* ") : ("- "));
             else if (CenterBox)
             {
                 Not_Triangle = (j >= 5 && j <= NotTrianlgeColumnL) || j >= NotTrianlgeColumnR;
                 if (Not_Triangle)
-                    cout << "*", Not_Triangle_RowFlag = true;
+                    cout << "* ", Not_Triangle_RowFlag = true;
                 else
                 {
                     if ((i + j - 16) <= (i - 7))
-                        cout << ++l;
+                        cout << ++l << " ";
                     else
-                        cout << --l;
+                        cout << --l << " ";
                 }
             }
             else
-                cout << " ";
+                cout << "  ";
 
             OuterDiamond = 0, InnerDiamond = 0, CenterBox = 0, Not_Triangle = 0;
         }
@@ -67,28 +67,28 @@ int main()
             CenterBox = (j >= 5) && (j <= 13);
 
             if (j == 1 || j == 17)
-                cout << ((i % 2 == 0) ? ("-") : ("*"));
+                cout << ((i % 2 == 0) ? ("- ") : ("* "));
             else if (j == 3 || j == 15)
-                cout << ((i % 2 == 0) ? ("*") : ("-"));
+                cout << ((i % 2 == 0) ? ("* ") : ("- "));
             else if (CenterBox)
             {
                 Not_Triangle = (j >= 5 && j <= NotTrianlgeColumnL) || j >= NotTrianlgeColumnR;
                 if (Not_Triangle)
-                    cout << "*", Not_Triangle_RowFlag = true;
+                    cout << "* ", Not_Triangle_RowFlag = true;
                 else if (i >= 13 && j >= 10)
                 {
-                    cout << " ";
+                    cout << "  ";
                 }
                 else
                 {
                     if ((i + j - 16) <= (i - 7))
-                        cout << ++l;
+                        cout << ++l << " ";
                     else
-                        cout << --l;
+                        cout << --l << " ";
                 }
             }
             else
-                cout << " ";
+                cout << "  ";
             CenterBox = 0, Not_Triangle = 0;
         }
         if (Not_Triangle_RowFlag)
@@ -108,13 +108,13 @@ int main()
             CenterBox = (i == 9 && j >= 5) && (j <= 13);
 
             if (OuterDiamond)
-                cout << ((i % 2 == 0) ? ("*") : ("-"));
+                cout << ((i % 2 == 0) ? ("* ") : ("- "));
             else if (InnerDiamond)
-                cout << ((i % 2 == 0) ? ("-") : ("*"));
+                cout << ((i % 2 == 0) ? ("- ") : ("* "));
             else if (CenterBox)
-                cout << "*";
+                cout << "* ";
             else
-                cout << " ";
+                cout << "  ";
 
             OuterDiamond = 0, InnerDiamond = 0, CenterBox = 0;
         }
