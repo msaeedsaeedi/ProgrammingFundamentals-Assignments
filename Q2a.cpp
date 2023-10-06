@@ -12,23 +12,17 @@ using namespace std;
 int main()
 {
     1, 4, 7, 10, 13;
-    int space = 25;
-    for (int i = 1; i <= 15; i++, cout << "*" << endl)
+    int space = 25, counter = 0;
+    for (int i = 1; i <= 16; i++, cout << endl)
     {
-        for (int j = 1; j <= space; j++)
-            cout << " ";
-        for (int j = 1; j <= 6; j++)
-            if ((i - 1) % 3 == 0 || j == 1)
-                cout << "*";
+        for (int j = 1; j <= 32; j++)
+            if (j == 32 || i == 16 || j == space + 1 || (counter <= 5 && counter > 0))
+                cout << "*", counter++;
             else
-                cout<<" ";
-        for (int j = 1; j <= 32 - space - 7; j++)
-            cout << " ";
+                cout << " ";
         if (i % 3 == 0)
-            space -= 5;
+            space -= 5, counter = 0;
     }
-    for (int i = 1; i <= 32; i++)
-        cout << "*";
     cout << endl;
     return 0;
 }
