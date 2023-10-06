@@ -1,5 +1,5 @@
 /*
-    Assignment # 2 - Q2
+    Assignment # 2 - Q2-B
 
     Name    : Mohammad Saeed
     Roll    : 23i-0777
