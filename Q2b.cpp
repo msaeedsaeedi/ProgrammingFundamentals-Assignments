@@ -60,7 +60,7 @@ int main()
         if (Not_PascalTriangle_RowFlag)
             NotPascalColumnL--, NotPascalColumnR++;
     }
-    for (int i = 1; i <= 6; i++, cout << endl)
+    for (int i = 10; i <= 16; i++, cout << endl)
     {
         Pascal_Coefficent = 1;
         for (int j = 1; j <= 17; j++)
@@ -68,9 +68,9 @@ int main()
             CenterBox = (j >= 5) && (j <= 13);
 
             if (j == 1 || j == 17)
-                cout << ((i % 2 == 0) ? ("*") : ("-"));
-            else if (j == 3 || j == 15)
                 cout << ((i % 2 == 0) ? ("-") : ("*"));
+            else if (j == 3 || j == 15)
+                cout << ((i % 2 == 0) ? ("*") : ("-"));
             else if (CenterBox)
             {
                 Not_PascalTriangle = (j >= 5 && j <= NotPascalColumnL) || j >= NotPascalColumnR;
@@ -89,7 +89,7 @@ int main()
         if (Not_PascalTriangle_RowFlag)
             NotPascalColumnL--, NotPascalColumnR++;
     }
-    for (int i = 9; i >= 1; i--, cout << endl)
+    for (int i = 8; i >= 1; i--, cout << endl)
     {
         for (int j = 1; j <= 17; j++)
         {
