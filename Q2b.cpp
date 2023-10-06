@@ -87,7 +87,10 @@ int main()
             CenterBox = 0, Not_PascalTriangle = 0;
         }
         if (Not_PascalTriangle_RowFlag)
-            NotPascalColumnL--, NotPascalColumnR++;
+        {
+            (i < 12) ? NotPascalColumnL-- : NotPascalColumnL++;
+            (i < 12) ? NotPascalColumnR++ : NotPascalColumnR--;
+        }
     }
     for (int i = 8; i >= 1; i--, cout << endl)
     {
