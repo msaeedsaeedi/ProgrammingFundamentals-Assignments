@@ -11,101 +11,51 @@ using namespace std;
 
 int main()
 {
-    bool OuterDiamond, InnerDiamond, CenterBox, Not_Triangle, Not_Triangle_RowFlag = false;
-    short int NotTrianlgeColumnL = 8;
-    short int NotTrianlgeColumnR = 10;
-    for (short int i = 1; i <= 9; i++, cout << endl)
+    bool OuterDiamond, InnerDiamond, CenterBox, Not_CentralDiamond, EmptyTriangle;
+
+    for (short int row = 1; row <= 24; row++, cout << endl)
     {
-        for (short int j = 1, l = 0; j <= 17; j++)
+        for (short int col = 1, n = 0; col <= 17; col++)
         {
-            OuterDiamond = (j - 8) == i || (i + j) == 10;
+            OuterDiamond = ((col - 8) == row || (row + col) == 10);
+            OuterDiamond = OuterDiamond || ((row >= 9 && row <= 16) && (col == 1 || col == 17));
+            OuterDiamond = OuterDiamond || (col == (row - 15) || (row + col) == 33);
 
-            InnerDiamond = (i != 1) && ((i + j) == 12 || (j - 6 == i));
+            InnerDiamond = (row != 1 && row < 10) && ((row + col) == 12 || (col - 6 == row));
+            InnerDiamond = InnerDiamond || ((row >= 9 && row <= 16) && (col == 3 || col == 15));
+            InnerDiamond = InnerDiamond || (row >= 16 && row < 24) && ((row + col) == 31 || col == (row - 13));
 
-            CenterBox = (i >= 8 && j >= 5) && (j <= 13);
+            CenterBox = (row >= 8 && row <= 16) && (col >= 5 && col <= 13);
 
             if (OuterDiamond)
-                cout << ((i % 2 == 0) ? ("- ") : ("* "));
+                cout << ((row % 2 == 0) ? ("- ") : ("* "));
             else if (InnerDiamond)
-                cout << ((i % 2 == 0) ? ("* ") : ("- "));
+                cout << ((row % 2 == 0) ? ("* ") : ("- "));
             else if (CenterBox)
             {
-                Not_Triangle = (j >= 5 && j <= NotTrianlgeColumnL) || j >= NotTrianlgeColumnR;
-                if (Not_Triangle)
-                    cout << "* ", Not_Triangle_RowFlag = true;
+                Not_CentralDiamond = (col <= 8) && ((row + col) <= 16);
+                Not_CentralDiamond = Not_CentralDiamond || ((col - 2) >= row);
+                Not_CentralDiamond = Not_CentralDiamond || ((col + 8) <= row);
+                Not_CentralDiamond = Not_CentralDiamond || ((row + col) >= 26);
+
+                if (Not_CentralDiamond)
+                    cout << "* ";
                 else
                 {
-                    if ((i + j - 16) <= (i - 7))
-                        cout << ++l << " ";
+                    EmptyTriangle = (row >= 13 && col >= 10);
+                    if (EmptyTriangle)
+                        cout << "  ";
                     else
-                        cout << --l << " ";
+                    {
+                        if ((row + col - 16) <= (row - 7))
+                            cout << ++n << " ";
+                        else
+                            cout << --n << " ";
+                    }
                 }
             }
             else
                 cout << "  ";
-
-            OuterDiamond = 0, InnerDiamond = 0, CenterBox = 0, Not_Triangle = 0;
-        }
-        if (Not_Triangle_RowFlag)
-            NotTrianlgeColumnL--, NotTrianlgeColumnR++;
-    }
-    for (short int i = 10; i <= 16; i++, cout << endl)
-    {
-        for (short int j = 1, l = 0; j <= 17; j++)
-        {
-            CenterBox = (j >= 5) && (j <= 13);
-
-            if (j == 1 || j == 17)
-                cout << ((i % 2 == 0) ? ("- ") : ("* "));
-            else if (j == 3 || j == 15)
-                cout << ((i % 2 == 0) ? ("* ") : ("- "));
-            else if (CenterBox)
-            {
-                Not_Triangle = (j >= 5 && j <= NotTrianlgeColumnL) || j >= NotTrianlgeColumnR;
-                if (Not_Triangle)
-                    cout << "* ", Not_Triangle_RowFlag = true;
-                else if (i >= 13 && j >= 10)
-                {
-                    cout << "  ";
-                }
-                else
-                {
-                    if ((i + j - 16) <= (i - 7))
-                        cout << ++l << " ";
-                    else
-                        cout << --l << " ";
-                }
-            }
-            else
-                cout << "  ";
-            CenterBox = 0, Not_Triangle = 0;
-        }
-        if (Not_Triangle_RowFlag)
-        {
-            (i < 12) ? NotTrianlgeColumnL-- : NotTrianlgeColumnL++;
-            (i < 12) ? NotTrianlgeColumnR++ : NotTrianlgeColumnR--;
-        }
-    }
-    for (short int i = 8; i >= 1; i--, cout << endl)
-    {
-        for (short int j = 1; j <= 17; j++)
-        {
-            OuterDiamond = (j - 8) == i || (i + j) == 10;
-
-            InnerDiamond = (i != 1) && ((i + j) == 12 || (j - 6 == i));
-
-            CenterBox = (i == 9 && j >= 5) && (j <= 13);
-
-            if (OuterDiamond)
-                cout << ((i % 2 == 0) ? ("* ") : ("- "));
-            else if (InnerDiamond)
-                cout << ((i % 2 == 0) ? ("- ") : ("* "));
-            else if (CenterBox)
-                cout << "* ";
-            else
-                cout << "  ";
-
-            OuterDiamond = 0, InnerDiamond = 0, CenterBox = 0;
         }
     }
     return 0;
