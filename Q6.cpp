@@ -15,7 +15,7 @@ using namespace std;
 int main()
 {
     unsigned long long int Tlamps = ~0;
-    int lamps, lamps_on = 0;
+    int lamps, lamps_on;
     int fps_count = 0;
     cout << "Enter Number of Lamps : ";
     cin >> lamps;
@@ -39,12 +39,12 @@ int main()
             for (int row = 1; row <= lamps * 2; row++, cout << endl)
             {
                 cout << "\t|";
-
+                int row_reg = (row - 1) / 2;
                 for (int col = 1; col <= 21; col++)
                 {
                     if (row & 1)
                     {
-                        int check = (Tlamps >> (((row - 1) / 2))) & 1;
+                        int check = (Tlamps >> row_reg) & 1;
                         if (check && (col == 2 || col == 20))
                             cout << "*";
                         else if (col == 11 && fps == row)
@@ -59,12 +59,11 @@ int main()
                 {
                     if (round == 1)
                     {
-                        if (((((row - 1) / 2) + 1) % 3) == 0)
-                            Tlamps = Tlamps & ~(1 << (((row - 1) / 2)));
+                        if (((row_reg + 1) % 3) == 0)
+                            Tlamps = Tlamps & ~(1 << row_reg);
                     }
-                    else if ((((row - 1) / 2) + 1) % round == 0)
+                    else if ((row_reg + 1) % round == 0)
                     {
-                        int row_reg = (((row - 1) / 2));
                         Tlamps = Tlamps ^ (1 << row_reg);
                     }
                 }
