@@ -8,27 +8,32 @@
 */
 #include <iostream>
 #include <unistd.h>
-#include <bitset>
 #include <ctime>
 using namespace std;
 
 int main()
 {
     unsigned long long int Tlamps = ~0;
-    int lamps, lamps_on;
+    int lamps, lamps_on = 0;
     int fps_count = 0;
-    cout << ">>> For Animation [1-20] <<<\n\n";
-    cout << "Enter Number of Lamps : ";
-    cin >> lamps;
-
-    if (lamps <= 0)
+    char animation;
+    cout << ">>> For Animation [1-10] <<<\n\n";
+    do
     {
-        system("clear");
-        cout << "\nThe Lamp count should be greater than zero.\n"
-             << endl;
-        return 1;
+        cout << "Enter Number of Lamps : ";
+        cin >> lamps;
+        cin.ignore(100, '\n');
+    } while (lamps <= 0);
+    if (lamps <= 10)
+    {
+        do
+        {
+            cout << "Do you want animation (y/n) : ";
+            cin >> animation;
+            cin.ignore(100, '\n');
+        } while (animation != 'n' && animation != 'N' && animation != 'y' && animation != 'Y');
     }
-    else if (lamps <= 20)
+    if (animation == 'y' || animation == 'Y')
     {
         for (int round = 1; round <= lamps; round++)
         {
@@ -84,6 +89,32 @@ int main()
                 usleep(300000);
             }
         }
+    }
+    else
+    {
+        for (int round = 1; round <= lamps; round++)
+        {
+            for (int row = 1; row <= lamps; row++)
+            {
+                if (round == 1)
+                {
+                    if (row >= 3 && (row % 3) == 0)
+                        Tlamps = Tlamps & ~(1 << row - 1);
+                }
+                else if (row % round == 0)
+                {
+                    Tlamps = Tlamps ^ (1 << row - 1);
+                }
+            }
+        }
+        system("clear");
+        for (int i = 0; i < lamps; i++)
+            if ((Tlamps >> i) & 1)
+                lamps_on++;
+        cout << "\n\n Total Lamps : \t" << lamps
+             << "\n Lamps on : \t" << lamps_on
+             << "\n Lamps off : \t" << (lamps - lamps_on)
+             << endl;
     }
     return 0;
 }
