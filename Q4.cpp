@@ -14,10 +14,21 @@ using namespace std;
 int main()
 {
     int n = 0, x = 0, y = 0;
-    cout << "Enter X : ";
-    cin >> x;
-    cout << "Enter N : ";
-    cin >> n;
+    do
+    {
+        cout << "Enter X : ";
+        cin >> x;
+        cin.ignore(10, '\n');
+
+    } while (x < 0);
+    do
+    {
+        cout << "Enter N : ";
+        cin >> n;
+        cin.ignore(10, '\n');
+
+    } while (x < 0);
+
     system("clear");
 
     if (x == 0 && n == 0)
