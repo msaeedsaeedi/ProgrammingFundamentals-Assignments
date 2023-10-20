@@ -19,7 +19,6 @@ int main()
         cin >> lamps;
         cin.ignore(100, '\n');
     } while (lamps <= 0);
-    float t = clock();
     int number = lamps;
     int partSize = 64;
     int i = 1;
@@ -52,6 +51,5 @@ int main()
          << "\n Lamps off : \t" << (lamps - lamps_on)
          << "\n"
          << endl;
-    cout << "Time : " << clock() - t;
     return 0;
 }
