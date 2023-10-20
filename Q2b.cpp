@@ -11,21 +11,24 @@ using namespace std;
 
 int main()
 {
+    int size = 7;
+
     bool OuterDiamond, InnerDiamond, CenterBox, Not_CentralDiamond, EmptyTriangle;
-
-    for (short int row = 1; row <= 24; row++, cout << endl)
+    int width = (2 * size + 7);
+    int height = (4 * size + 4);
+    for (short int row = 1; row <= height; row++, cout << endl)
     {
-        for (short int col = 1, n = 0; col <= 17; col++)
+        for (short int col = 1, n = 0; col <= width; col++)
         {
-            OuterDiamond = ((col - 8) == row || (row + col) == 10);
-            OuterDiamond = OuterDiamond || ((row >= 9 && row <= 16) && (col == 1 || col == 17));
-            OuterDiamond = OuterDiamond || (col == (row - 15) || (row + col) == 33);
+            OuterDiamond = ((row + col) == (size + 5)) || ((col - (size + 3)) == row);
+            OuterDiamond = OuterDiamond || ((row >= (size + 4) && row <= (3 * size + 1)) && (col == 1 || col == width));
+            OuterDiamond = OuterDiamond || ((row - col == 3 * size) || (row + col) == (5 * size + 8));
 
-            InnerDiamond = (row != 1 && row < 10) && ((row + col) == 12 || (col - 6 == row));
-            InnerDiamond = InnerDiamond || ((row >= 9 && row <= 16) && (col == 3 || col == 15));
-            InnerDiamond = InnerDiamond || (row >= 16 && row < 24) && ((row + col) == 31 || col == (row - 13));
+            InnerDiamond = (row != 1 && row < (size + 5)) && ((row + col) == (size + 7) || (col - (size + 1) == row));
+            InnerDiamond = InnerDiamond || ((row >= (size + 4) && row <= (3 * size + 1)) && (col == 3 || col == width - 2));
+            InnerDiamond = InnerDiamond || (row >= (3 * size + 1) && row < height) && ((row - col) == (3 * size - 2) || (row + col) == (5 * size + 6));
 
-            CenterBox = (row >= 8 && row <= 16) && (col >= 5 && col <= 13);
+            CenterBox = (row >= (size + 3) && row <= (3 * size + 1)) && (col >= 5 && col <= width - 4);
 
             if (OuterDiamond)
                 cout << ((row % 2 == 0) ? ("- ") : ("* "));
@@ -33,21 +36,21 @@ int main()
                 cout << ((row % 2 == 0) ? ("* ") : ("- "));
             else if (CenterBox)
             {
-                Not_CentralDiamond = (col <= 8) && ((row + col) <= 16);
+                Not_CentralDiamond = (col <= ((size <= 4) ? (size + 3) : (2 * size - 2))) && ((row + col) <= (2 * size + 6));
                 Not_CentralDiamond = Not_CentralDiamond || ((col - 2) >= row);
-                Not_CentralDiamond = Not_CentralDiamond || ((col + 8) <= row);
-                Not_CentralDiamond = Not_CentralDiamond || ((row + col) >= 26);
+                Not_CentralDiamond = Not_CentralDiamond || ((col + (2 * size - 2)) <= row);
+                Not_CentralDiamond = Not_CentralDiamond || ((row + col) >= ((4 * size + 6)));
 
                 if (Not_CentralDiamond)
                     cout << "* ";
                 else
                 {
-                    EmptyTriangle = (row >= 13 && col >= 10);
+                    EmptyTriangle = (row >= (2 * size + 3) && col >= (size + 5));
                     if (EmptyTriangle)
                         cout << "  ";
                     else
                     {
-                        if ((row + col - 16) <= (row - 7))
+                        if ((row + col - (size + 11)) <= (row - 7))
                             cout << ++n << " ";
                         else
                             cout << --n << " ";
