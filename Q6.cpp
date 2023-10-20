@@ -31,15 +31,19 @@ int main()
         {
             for (int row = ((partSize * i) + 1 - partSize); row <= (partSize * i) - (partSize - currentPart); row++)
             {
-                if (round == 1 && row >= 3 && (row % 3) == 0)
-                    Tlamps = Tlamps & ~(1 << (((row - 1) % 5) + 1) - 1);
+                if (round == 1)
+                {
+                    if (row >= 3 && (row % 3) == 0)
+                        Tlamps = Tlamps & ~(1 << (((row - 1) % 5) + 1) - 1);
+                }
                 else if (row % round == 0)
                     Tlamps = Tlamps ^ (1 << (((row - 1) % 5) + 1) - 1);
             }
         }
-        for (int i = 0; i < currentPart; i++)
-            if ((Tlamps >> i) & 1)
+        for (int j = 0; j < currentPart; j++)
+            if ((Tlamps >> j) & 1)
                 lamps_on++;
+
         number -= currentPart;
         i++;
     }
