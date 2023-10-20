@@ -8,6 +8,7 @@
 */
 #include <iostream>
 #include <string>
+#include <unistd.h>
 using namespace std;
 
 int main()
@@ -19,7 +20,7 @@ int main()
     unsigned int dice_1 = 0, dice_2 = 0;
     unsigned int P1_Score = 0, P2_Score = 0;
     int P1_last_index = 0, P2_last_index = 0;
-
+    bool tie = false;
     cout << "Player 1\n\n Name : ";
     getline(cin, P1_name);
 
@@ -40,14 +41,18 @@ int main()
     P2_last_index += (P2_name.at(P2_name.length() - 1) - 64) * (P2_name.at(P2_name.length() - 1) <= 90);
     P2_last_index += (P2_name.at(P2_name.length() - 1) - 96) * (P2_name.at(P2_name.length() - 1) >= 97);
 
+    cout << "\n=================================";
     cout << "\n=================================" << endl;
     for (int round = 1; round <= 5; round++)
     {
+
         cout << "\nRound " << round << "\n"
              << endl;
+        bool extra_roll = false;
+        int round_sum;
         for (int player = 1; player <= 2; player++)
         {
-            int round_sum = 0;
+            (extra_roll) ? (extra_roll = false) : (round_sum = 0);
             cout << " Player : " << player << endl;
             for (int i = 1; i <= 2; i++)
             {
@@ -59,14 +64,22 @@ int main()
             }
             if (round_sum == P1_roll % 100 || round_sum == P2_roll % 100)
             {
-                round_sum += (P1_roll % 10) * (player == 1);
-                round_sum += (P2_roll % 10) * (player == 2);
+                int points = 0;
+                points += (P1_roll % 10) * (player == 1);
+                points += (P2_roll % 10) * (player == 2);
+                round_sum += points;
+                cout << "\n  ** Awarded Points +" << points << " **" << endl;
             }
-
             if (round_sum == P1_last_index || round_sum == P2_last_index)
-                round_sum += 5;
-            if (((-round_sum) * (-round_sum) - 4 * (round_sum)) == 0)
             {
+                round_sum += 5;
+                cout << "\n  ** Awarded Points +5 **" << endl;
+            }
+            if (((round_sum) * (round_sum)-4 * (round_sum)) == 0)
+            {
+                cout << "\n  ** Awarded Extra Roll **\n"
+                     << endl;
+                extra_roll = true;
                 player--;
                 continue;
             }
@@ -77,29 +90,69 @@ int main()
             cout << "\n  -> Score : " << round_sum << " <-\n"
                  << endl;
         }
-        cout << "=================================" << endl;
-
+        if (round != 5)
+        {
+            cout << "=================================" << endl;
+            cout << "    Press Enter to continue..." << endl;
+            cout << "=================================";
+            cin.get();
+        }
         if (round == 5)
         {
-            cout << "    Player 1 Score : " << P1_Score << endl;
-            cout << "    Player 2 Score : " << P2_Score << endl;
             cout << "=================================" << endl;
-
+            cout << "    Player 1 Score : \t" << P1_Score << endl;
+            cout << "    Player 2 Score : \t" << P2_Score << endl;
+            cout << "=================================" << endl;
             if (P1_Score > P2_Score)
             {
-                cout << "  Player \" " << P1_name << " \" Wins";
+                cout << "    " << P1_name << " Wins" << endl;
+                cout << "=================================" << endl;
             }
             else if (P2_Score > P1_Score)
             {
-                cout << "  Player \" " << P2_name << " \" Wins";
+                cout << "    " << P2_name << " Wins" << endl;
+                cout << "=================================" << endl;
             }
             else
-            {
-                round--;
-                continue;
-            }
+                tie = true;
         }
     }
-
+    if (tie)
+    {
+        while (tie)
+        {
+            cout << "\nFinal Round\n"
+                 << endl;
+            for (int player = 1; player <= 2; player++)
+            {
+                cout << " Player : " << player;
+                dice_1 = 1 + (rand() % 6);
+                cout << "\n  Dice : " << dice_1 << endl
+                     << endl;
+                if (player == 1)
+                    P1_Score += dice_1;
+                else
+                    P2_Score += dice_1;
+            }
+            cout << "=================================" << endl;
+            cout << "     Player 1 Score : \t" << P1_Score << endl;
+            cout << "     Player 2 Score : \t" << P2_Score << endl;
+            cout << "=================================" << endl;
+            if (P1_Score > P2_Score)
+            {
+                cout << "     " << P1_name << " Wins" << endl;
+                cout << "=================================" << endl;
+                tie = false;
+            }
+            else if (P2_Score > P1_Score)
+            {
+                cout << "     " << P2_name << " Wins" << endl;
+                cout << "=================================" << endl;
+                tie = false;
+            }
+            else
+                tie = true;
+        }
+    }
     return 0;
 }
