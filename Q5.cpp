@@ -15,8 +15,8 @@ int main()
 {
     srand(time(0));
 
-    string P1_name, P2_name;
-    unsigned int P1_roll = 0, P2_roll = 0;
+    string P1_name, P2_name, P1_roll, P2_roll;
+    unsigned int P1_rollL1 = 0, P1_rollL2 = 0, P2_rollL1 = 0, P2_rollL2 = 0;
     unsigned int dice_1 = 0, dice_2 = 0;
     unsigned int P1_Score = 0, P2_Score = 0;
     int P1_last_index = 0, P2_last_index = 0;
@@ -24,22 +24,26 @@ int main()
     cout << "Player 1\n\n Name : ";
     getline(cin, P1_name);
 
-    cout << " Roll (last 4 digits) : ";
-    cin >> P1_roll;
-    cin.ignore(4, '\n');
+    cout << " Roll : ";
+    getline(cin, P1_roll);
 
     cout << "\nPlayer 2\n\n Name : ";
     getline(cin, P2_name);
 
-    cout << " Roll (last 4 digits) : ";
-    cin >> P2_roll;
-    cin.ignore(4, '\n');
+    cout << " Roll : ";
+    getline(cin, P2_roll);
 
     P1_last_index += (P1_name.at(P1_name.length() - 1) - 64) * (P1_name.at(P1_name.length() - 1) <= 90);
     P1_last_index += (P1_name.at(P1_name.length() - 1) - 96) * (P1_name.at(P1_name.length() - 1) >= 97);
 
     P2_last_index += (P2_name.at(P2_name.length() - 1) - 64) * (P2_name.at(P2_name.length() - 1) <= 90);
     P2_last_index += (P2_name.at(P2_name.length() - 1) - 96) * (P2_name.at(P2_name.length() - 1) >= 97);
+
+    P1_rollL1 = int(P1_roll.at(P1_roll.length() - 1)) - 48;
+    P1_rollL2 = int(P1_roll.at(P1_roll.length() - 2)) - 48;
+
+    P2_rollL1 = int(P2_roll.at(P2_roll.length() - 1)) - 48;
+    P2_rollL2 = int(P2_roll.at(P2_roll.length() - 2)) - 48;
 
     cout << "\n=================================";
     cout << "\n=================================" << endl;
@@ -62,11 +66,11 @@ int main()
                 cout << "\n  Dice 2 : " << dice_2 << endl;
                 round_sum += dice_1 + dice_2;
             }
-            if (round_sum == P1_roll % 100 || round_sum == P2_roll % 100)
+            if (round_sum == (P1_rollL1 + P1_rollL2) || round_sum == (P2_rollL1 + P2_rollL2))
             {
                 int points = 0;
-                points += (P1_roll % 10) * (player == 1);
-                points += (P2_roll % 10) * (player == 2);
+                points += (P1_rollL1) * (player == 1);
+                points += (P2_rollL1) * (player == 2);
                 round_sum += points;
                 cout << "\n  ** Awarded Points +" << points << " **" << endl;
             }
