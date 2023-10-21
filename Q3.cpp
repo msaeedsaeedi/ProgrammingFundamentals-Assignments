@@ -25,7 +25,8 @@ int main()
     double v = 0;
     double s = 0;
     double s_sec = 0;
-    double formula_s = 0;
+    double sf_sec = 0;
+    double s_formula = 0;
     double max_height = 0;
     double t_max_height = 0;
 
@@ -39,21 +40,56 @@ int main()
     t_max_height = (double(initial_velocity) / G);
     max_height = (initial_velocity * (t_max_height)) - ((G / 2) * (t_max_height * t_max_height));
 
-    while (formula_s >= 0)
+    int step = (0.05 * (ceil(max_height) - 128)) + 7;
+    int rounded_height = ((int(ceil(max_height)) % step != 0) ? (ceil(max_height) + (step - int(ceil(max_height)) % step)) : (floor(max_height)));
+
+    while (s_sec >= 0)
     {
         system("clear");
         scaledValue++;
         t = double(scaledValue) / scaleFactor;
         s += v * delta;
         v -= G * delta;
-        formula_s = (initial_velocity * t) - ((G / 2) * (t * t));
+        s_formula = (initial_velocity * t) - ((G / 2) * (t * t));
         Is_Second = ((floor(abs(v)) == initial_velocity) || int(ceil(t * 100)) % 100 == 0);
         if (Is_Second)
+        {
             s_sec = s;
-        // cout << (t) << "\t- " << setfill('0') << setw(8) << fixed << s_sec << "\t- " << formula_s << "\t- " << v << endl;
+            sf_sec = s_formula;
+        }
+
+        cout << "\n Interval [0-" << step << "] Rounded-up\n"
+             << endl;
+        cout << "\n --Time------------------ \n";
+        cout << " |                      |" << endl;
+        cout << " | Total   : " << setw(10) << setfill(' ') << fixed << setprecision(4) << t_max_height << " |" << endl;
+        cout << " | Current : " << setw(10) << setfill(' ') << fixed << setprecision(4) << t << " |" << endl;
+        cout << " ------------------------" << endl;
+
+        cout << "\n --Position--------------";
+        cout << "\t --Velocity-------------- \n";
+        cout << " |                      |";
+        cout << "\t |                      |\n";
+        cout << " | Update  : " << setw(10) << setfill(' ') << fixed << setprecision(4) << s_sec << " |";
+        cout << "\t | Initial : " << setw(10) << setfill(' ') << initial_velocity << " |\n";
+        cout << " | Formula : " << setw(10) << setfill(' ') << fixed << setprecision(4) << sf_sec << " |";
+        cout << "\t | Update  : " << setw(10) << setfill(' ') << fixed << setprecision(4) << v << " |\n";
+        cout << " ------------------------";
+        cout << "\t ------------------------\n\n";
+
+        for (int i = 0; i <= rounded_height; i += step)
+        {
+            if ((s_sec < i) && (s_sec > i - step))
+                cout << " ";
+            cout << setw(4) << setfill('0') << i << " |";
+            if ((s_sec < i) && (s_sec > i - step))
+                cout << "  *";
+            cout << "\n";
+        }
+        cout << endl;
         if (Is_Second)
         {
-            cout << "Press [Enter] to Continue";
+            cout << "Press [Enter] to Continue...";
             cin.get();
         }
     }
