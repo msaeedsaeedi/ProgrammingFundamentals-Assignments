@@ -14,75 +14,78 @@ using namespace std;
 
 int main()
 {
-    unsigned short int initial_velocity = 0;
+    unsigned short int Initial_Velocity = 0;
     const float G = 9.8;
 
-    int scaledValue = 0;
+    int time_scale = 0;
     int scaleFactor = 100;
     const double delta = 0.01;
 
-    double t = 0;
-    double v = 0;
-    double s = 0;
-    double s_sec = 0;
-    double sf_sec = 0;
-    double s_formula = 0;
-    double max_height = 0;
-    double t_max_height = 0;
+    double Time = 0;
+    double Velocity = 0;
+    double Position = 0;
+    double Position_second = 0;
+    double F_Position_second = 0;
+    double F_Position = 0;
+    double Position_max = 0;
+    double Time_Position_max = 0;
+
+    int step = 0;
+    int Height_rounded = 0;
 
     bool Is_Second = false;
 
     cout << "Enter Initial Velocity : ";
-    cin >> initial_velocity;
+    cin >> Initial_Velocity;
     cin.ignore(1000, '\n');
 
-    v = initial_velocity;
-    t_max_height = (double(initial_velocity) / G);
-    max_height = (initial_velocity * (t_max_height)) - ((G / 2) * (t_max_height * t_max_height));
+    Velocity = Initial_Velocity;
+    Time_Position_max = (double(Initial_Velocity) / G);
+    Position_max = (Initial_Velocity * (Time_Position_max)) - ((G / 2) * (Time_Position_max * Time_Position_max));
 
-    int step = (0.05 * (ceil(max_height) - 128)) + 7;
-    int rounded_height = ((int(ceil(max_height)) % step != 0) ? (ceil(max_height) + (step - int(ceil(max_height)) % step)) : (floor(max_height)));
+    step = (0.05 * (ceil(Position_max) - 128)) + 7;
+    Height_rounded = ((int(ceil(Position_max)) % step != 0) ? (ceil(Position_max) + (step - int(ceil(Position_max)) % step)) : (floor(Position_max)));
 
-    while (s_sec >= 0)
+    while (Position_second >= 0)
     {
         system("clear");
-        scaledValue++;
-        t = double(scaledValue) / scaleFactor;
-        s += v * delta;
-        v -= G * delta;
-        s_formula = (initial_velocity * t) - ((G / 2) * (t * t));
-        Is_Second = ((floor(abs(v)) == initial_velocity) || int(ceil(t * 100)) % 100 == 0);
+        time_scale++;
+        Time = double(time_scale) / scaleFactor;
+        Position += Velocity * delta;
+        Velocity -= G * delta;
+        F_Position = (Initial_Velocity * Time) - ((G / 2) * (Time * Time));
+        Is_Second = ((floor(abs(Velocity)) == Initial_Velocity) || int(ceil(Time * 100)) % 100 == 0);
         if (Is_Second)
         {
-            s_sec = s;
-            sf_sec = s_formula;
+            Position_second = Position;
+            F_Position_second = F_Position;
         }
 
         cout << "\n Interval [0-" << step << "] Rounded-up\n"
              << endl;
         cout << "\n --Time------------------ \n";
         cout << " |                      |" << endl;
-        cout << " | Total   : " << setw(10) << setfill(' ') << fixed << setprecision(4) << t_max_height << " |" << endl;
-        cout << " | Current : " << setw(10) << setfill(' ') << fixed << setprecision(4) << t << " |" << endl;
+        cout << " | Total   : " << setw(10) << setfill(' ') << fixed << setprecision(4) << Time_Position_max << " |" << endl;
+        cout << " | Current : " << setw(10) << setfill(' ') << fixed << setprecision(4) << Time << " |" << endl;
         cout << " ------------------------" << endl;
 
         cout << "\n --Position--------------";
         cout << "\t --Velocity-------------- \n";
         cout << " |                      |";
         cout << "\t |                      |\n";
-        cout << " | Update  : " << setw(10) << setfill(' ') << fixed << setprecision(4) << s_sec << " |";
-        cout << "\t | Initial : " << setw(10) << setfill(' ') << initial_velocity << " |\n";
-        cout << " | Formula : " << setw(10) << setfill(' ') << fixed << setprecision(4) << sf_sec << " |";
-        cout << "\t | Update  : " << setw(10) << setfill(' ') << fixed << setprecision(4) << v << " |\n";
+        cout << " | Update  : " << setw(10) << setfill(' ') << fixed << setprecision(4) << Position_second << " |";
+        cout << "\t | Initial : " << setw(10) << setfill(' ') << Initial_Velocity << " |\n";
+        cout << " | Formula : " << setw(10) << setfill(' ') << fixed << setprecision(4) << F_Position_second << " |";
+        cout << "\t | Update  : " << setw(10) << setfill(' ') << fixed << setprecision(4) << Velocity << " |\n";
         cout << " ------------------------";
         cout << "\t ------------------------\n\n";
 
-        for (int i = 0; i <= rounded_height; i += step)
+        for (int i = 0; i <= Height_rounded; i += step)
         {
-            if ((s_sec < i) && (s_sec > i - step))
+            if ((Position_second < i) && (Position_second > i - step))
                 cout << " ";
             cout << setw(4) << setfill('0') << i << " |";
-            if ((s_sec < i) && (s_sec > i - step))
+            if ((Position_second < i) && (Position_second > i - step))
                 cout << "  *";
             cout << "\n";
         }
