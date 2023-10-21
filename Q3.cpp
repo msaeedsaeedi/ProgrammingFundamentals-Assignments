@@ -17,8 +17,8 @@ int main()
     unsigned short int Initial_Velocity = 0;
     const float G = 9.8;
 
-    int time_scale = 0;
-    int scaleFactor = 100;
+    unsigned int time_scale = 0;
+    const short int scaleFactor = 100;
     const double delta = 0.01;
 
     double Time = 0;
