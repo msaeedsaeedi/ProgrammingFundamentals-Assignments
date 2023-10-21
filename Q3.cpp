@@ -24,26 +24,34 @@ int main()
     double t = 0;
     double v = 0;
     double s = 0;
-    double S_sec = 0;
+    double s_sec = 0;
     double formula_s = 0;
+    double max_height = 0;
+    double t_max_height = 0;
+
+    bool Is_Second = false;
+
     cout << "Enter Initial Velocity : ";
     cin >> initial_velocity;
     cin.ignore(1000, '\n');
+
     v = initial_velocity;
+    t_max_height = (double(initial_velocity) / G);
+    max_height = (initial_velocity * (t_max_height)) - ((G / 2) * (t_max_height * t_max_height));
+
     while (formula_s >= 0)
     {
-        bool second = false;
         system("clear");
         scaledValue++;
         t = double(scaledValue) / scaleFactor;
         s += v * delta;
         v -= G * delta;
         formula_s = (initial_velocity * t) - ((G / 2) * (t * t));
-        second = ((floor(abs(v)) == initial_velocity) || int(ceil(t * 100)) % 100 == 0);
-        if (second)
-            S_sec = s;
-        //cout << (t) << "\t- " << setfill('0') << setw(8) << fixed << S_sec << "\t- " << formula_s << "\t- " << v << endl;
-        if (second)
+        Is_Second = ((floor(abs(v)) == initial_velocity) || int(ceil(t * 100)) % 100 == 0);
+        if (Is_Second)
+            s_sec = s;
+        // cout << (t) << "\t- " << setfill('0') << setw(8) << fixed << s_sec << "\t- " << formula_s << "\t- " << v << endl;
+        if (Is_Second)
         {
             cout << "Press [Enter] to Continue";
             cin.get();
