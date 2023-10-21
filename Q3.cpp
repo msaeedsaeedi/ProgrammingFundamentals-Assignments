@@ -35,9 +35,16 @@ int main()
 
     bool Is_Second = false;
 
-    cout << "Enter Initial Velocity : ";
-    cin >> Initial_Velocity;
-    cin.ignore(1000, '\n');
+    do
+    {
+        cout << "Enter Initial Velocity [50,150] : ";
+        cin >> Initial_Velocity;
+        if (cin.fail())
+        {
+            cin.clear();
+            cin.ignore(1000, '\n');
+        }
+    } while (Initial_Velocity < 50 || Initial_Velocity > 150);
 
     Velocity = Initial_Velocity;
     Time_Position_max = (double(Initial_Velocity) / G);
