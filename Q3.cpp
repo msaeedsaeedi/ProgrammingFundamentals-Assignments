@@ -69,7 +69,7 @@ int main()
              << endl;
         cout << "\n --Time------------------ \n";
         cout << " |                      |" << endl;
-        cout << " | Total   : " << setw(10) << setfill(' ') << fixed << setprecision(4) << Time_Position_max << " |" << endl;
+        cout << " | Total   : " << setw(10) << setfill(' ') << fixed << setprecision(4) << Time_Position_max * 2 << " |" << endl;
         cout << " | Current : " << setw(10) << setfill(' ') << fixed << setprecision(4) << Time << " |" << endl;
         cout << " ------------------------" << endl;
 
