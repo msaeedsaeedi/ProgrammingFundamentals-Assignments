@@ -17,6 +17,8 @@ int main()
     {
         cout << " Enter Number of Lamps : ";
         cin >> lamps;
+        if (cin.fail())
+            cin.clear();
         cin.ignore(100, '\n');
     } while (lamps <= 0);
     int number = lamps;
