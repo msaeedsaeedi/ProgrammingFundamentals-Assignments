@@ -13,11 +13,13 @@ using namespace std;
 
 int main()
 {
-    int n = 0, x = 0, y = 0;
+    int n = -1, x = -1, y = 0;
     do
     {
         cout << "Enter X : ";
         cin >> x;
+        if (cin.fail())
+            cin.clear(), x = -1;
         cin.ignore(10, '\n');
 
     } while (x < 0);
@@ -25,9 +27,11 @@ int main()
     {
         cout << "Enter N : ";
         cin >> n;
+        if (cin.fail())
+            cin.clear(), n = -1;
         cin.ignore(10, '\n');
 
-    } while (x < 0);
+    } while (n < 0);
 
     system("clear");
 
