@@ -16,7 +16,7 @@ int main()
     int n = -1, x = -1, y = 0;
     do
     {
-        cout << "Enter X : ";
+        cout << "Enter X [0,x] : ";
         cin >> x;
         if (cin.fail())
             cin.clear(), x = -1;
@@ -25,13 +25,13 @@ int main()
     } while (x < 0);
     do
     {
-        cout << "Enter N : ";
+        cout << "Enter N [1,n] : ";
         cin >> n;
         if (cin.fail())
             cin.clear(), n = -1;
         cin.ignore(10, '\n');
 
-    } while (n < 0);
+    } while (n <= 0);
 
     system("clear");
 
@@ -46,17 +46,20 @@ int main()
     for (int i = y; i >= 0; i -= 1, cout << endl)
     {
         if (i % 2 == 0)
+        {
             cout << setw(2) << setfill('0') << i << " |";
+
+            for (int j = 0; j <= x; j++)
+            {
+                y = pow(j, n) + pow(j, n - 1);
+                if (y == i)
+                    cout << "    *";
+                else
+                    cout << "     ";
+            }
+        }
         else
             cout << "   |";
-        for (int j = 0; j <= x; j++)
-        {
-            y = pow(j, n) + pow(j, n - 1);
-            if (y == i)
-                cout << "    *";
-            else
-                cout << "     ";
-        }
     }
     cout << "___|____";
     for (int i = 0; i <= x + 1; i++)
