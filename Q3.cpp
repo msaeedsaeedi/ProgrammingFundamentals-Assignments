@@ -88,7 +88,7 @@ int main()
         {
             if ((Position_second < i) && (Position_second > i - step))
                 cout << " ";
-            cout << setw(4) << setfill('0') << i << " |";
+            cout <<" " << setw(4) << setfill('0') << i << " |";
             if ((Position_second < i) && (Position_second > i - step))
                 cout << "  *";
             cout << "\n";
