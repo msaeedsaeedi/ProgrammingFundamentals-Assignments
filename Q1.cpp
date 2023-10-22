@@ -16,9 +16,16 @@ int main()
     short int Gate_1, Gate_2, Gate_3, Gate_4;
     Gate_1 = Gate_2 = Gate_3 = Gate_4 = 0;
 
-    cout << " Positive Number : ";
-    cin >> num;
-
+    int temp = -1;
+    do
+    {
+        cout << " Positive Number : ";
+        cin >> temp;
+        if (cin.fail())
+            cin.clear(), temp = -1;
+        cin.ignore(1000, '\n');
+    } while (temp < 0);
+    num = temp;
     cout << "\n Binary : ";
     for (int i = 31; i >= 0; i--)
         cout << ((num >> i) & 1);
@@ -96,18 +103,39 @@ int main()
         break;
     }
     case 3:
+    {
+        cout << "\n";
         char c;
-        cout << "\n Operation [ Multiply (*) / Divide (/) ] : ";
-        cin >> c;
+        do
+        {
+            cout << " Operation [ Multiply (*) / Divide (/) ] : ";
+            cin >> c;
+            if (cin.fail())
+                cin.clear();
+            cin.ignore(1000, '\n');
+        } while (c != '*' && c != '/');
         switch (c)
         {
         case '*':
         {
-            int a, b, product = 0;
-            cout << "\n Enter First Numbers  : ";
-            cin >> a;
-            cout << " Enter Second Numbers : ";
-            cin >> b;
+            cout << "\n";
+            int a = -1, b = -1, product = 0;
+            do
+            {
+                cout << " Enter First Numbers  : ";
+                cin >> a;
+                if (cin.fail())
+                    cin.clear(), a = -1;
+                cin.ignore(1000, '\n');
+            } while (a < 0);
+            do
+            {
+                cout << " Enter Second Numbers : ";
+                cin >> b;
+                if (cin.fail())
+                    cin.clear(), b = -1;
+                cin.ignore(1000, '\n');
+            } while (b < 0);
             bool negative = (a < 0) ^ (b < 0);
             a = abs(a);
             b = abs(b);
@@ -120,12 +148,24 @@ int main()
         }
         case '/':
         {
-            int a, b;
+            int a = -1, b = -1;
             int Quotient = 0;
-            cout << "\n Enter First Numbers : ";
-            cin >> a;
-            cout << " Enter Second Numbers : ";
-            cin >> b;
+            do
+            {
+                cout << " Enter First Numbers  : ";
+                cin >> a;
+                if (cin.fail())
+                    cin.clear(), a = -1;
+                cin.ignore(1000, '\n');
+            } while (a < 0);
+            do
+            {
+                cout << " Enter Second Numbers : ";
+                cin >> b;
+                if (cin.fail())
+                    cin.clear(), b = -1;
+                cin.ignore(1000, '\n');
+            } while (b <= 0);
             bool negative = (a < 0) ^ (b < 0);
             a = abs(a), b = abs(b);
             while (a >= b)
@@ -138,10 +178,9 @@ int main()
             cout << "\n Division : " << Quotient << endl;
             break;
         }
-        default:
-            cout << "Invalid";
         }
         break;
+    }
     }
 
     return 0;
