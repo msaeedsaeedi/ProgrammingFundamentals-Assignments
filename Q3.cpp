@@ -39,11 +39,8 @@ int main()
     {
         cout << "Enter Initial Velocity [50,150] : ";
         cin >> Initial_Velocity;
-        if (cin.fail())
-        {
-            cin.clear();
-            cin.ignore(1000, '\n');
-        }
+        cin.clear();
+        cin.ignore(1000, '\n');
     } while (Initial_Velocity < 50 || Initial_Velocity > 150);
 
     Velocity = Initial_Velocity;
